@@ -1,0 +1,153 @@
+
+body {
+  margin: 0;
+  /* Default base styles are handled by Layout, but prevent white flash */
+  background-color: #ffffff; 
+  overflow: hidden; 
+  /* Remove tap highlight on mobile for cleaner feel */
+  -webkit-tap-highlight-color: transparent;
+  user-select: text;
+  -webkit-user-select: text;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Universal Inter sans-serif enforcement for all text, numbers, chart labels, and tooltips */
+*, button, input, select, textarea,
+svg text, svg tspan,
+.recharts-text,
+.recharts-label,
+.recharts-cartesian-axis-tick-value,
+.recharts-legend-item-text,
+.recharts-default-tooltip {
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Text selection highlight styling for standard web copy experience */
+::selection {
+  background-color: rgba(56, 189, 248, 0.35);
+  color: inherit;
+}
+
+::-moz-selection {
+  background-color: rgba(56, 189, 248, 0.35);
+  color: inherit;
+}
+
+/* Ensure transitions for color changes are smooth */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, transform, opacity, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Mobile tap target optimization */
+button {
+  touch-action: manipulation;
+}
+
+/* --- RECHARTS FOCUS FIX --- */
+/* Remove the default browser focus outline (black box) on clicked SVG elements */
+.recharts-wrapper {
+  outline: none !important;
+}
+
+.recharts-wrapper :focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Target specific SVG shapes to be sure */
+.recharts-surface,
+.recharts-layer,
+.recharts-sector,
+.recharts-rectangle,
+.recharts-dot,
+.recharts-curve,
+path,
+circle,
+rect,
+g {
+  outline: none !important;
+}
+
+/* --- LEAFLET CLEAN MAP & TOOLTIP STYLING --- */
+.leaflet-container {
+  font-family: 'Inter', sans-serif !important;
+  background-color: #e2e8f0;
+}
+
+html.dark .leaflet-container {
+  background-color: #0b1329 !important;
+}
+
+/* --- LEAFLET GPU ACCELERATION & ZERO FLICKER RULES --- */
+.leaflet-pane,
+.leaflet-tile-pane,
+.leaflet-marker-pane,
+.leaflet-shadow-pane,
+.leaflet-overlay-pane {
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Prevent universal transition (*) from lagging Leaflet continuous drag/pan transforms */
+.leaflet-container *,
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-tile-container,
+.leaflet-zoom-animated {
+  transition: none;
+}
+
+/* Smooth tile opacity fade without flashing */
+.leaflet-tile {
+  transition: opacity 0.2s cubic-bezier(0.2, 0, 0, 1) !important;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.leaflet-zoom-animated {
+  transition: transform 0.25s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+}
+
+.leaflet-custom-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Smooth pin scale & hover transitions */
+.marker-pin-inner {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s ease !important;
+  will-change: transform;
+  transform-origin: 14px 34px;
+}
+
+.leaflet-custom-tooltip,
+.leaflet-tooltip.leaflet-custom-tooltip,
+.leaflet-tooltip.leaflet-custom-popup {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.leaflet-tooltip-top:before,
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+  display: none !important;
+}
+
